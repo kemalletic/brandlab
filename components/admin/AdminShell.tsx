@@ -81,7 +81,21 @@ export default function AdminShell({ children }: { children: ReactNode }) {
 
       {/* Sadržaj */}
       <div className="flex min-w-0 flex-1 flex-col lg:ml-[232px]">
-        <div className="border-b border-line bg-white px-5 py-2.5 sm:px-8">
+        <div className="flex items-center justify-between gap-3 bg-ink px-4 py-3 text-white lg:hidden">
+          <Link href="/admin" className="flex items-baseline gap-2">
+            <span className="h-display text-base leading-none">BRANDLAB</span>
+            <span className="label-tech text-cobalt">Admin</span>
+          </Link>
+          <Link
+            href="/"
+            className="-mr-1.5 flex h-9 items-center gap-1.5 px-1.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-white/70"
+          >
+            <IconExternal className="h-4 w-4" />
+            Na sajt
+          </Link>
+        </div>
+
+        <div className="border-b border-line bg-white px-4 py-2.5 sm:px-8">
           <p className="text-[11px] leading-relaxed text-steel">
             <span className="font-semibold text-ink">Demo.</span> Izmjene se
             čuvaju u ovom browseru i ne mijenjaju javni sajt.
