@@ -152,3 +152,70 @@ export function IconEyeOff(props: IconProps) {
     </Svg>
   );
 }
+
+export function IconGrid(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <rect x="3.5" y="3.5" width="7" height="7" />
+      <rect x="13.5" y="3.5" width="7" height="7" />
+      <rect x="3.5" y="13.5" width="7" height="7" />
+      <rect x="13.5" y="13.5" width="7" height="7" />
+    </Svg>
+  );
+}
+
+export function IconBox(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M20.5 7.8v8.4a1.6 1.6 0 0 1-.85 1.4l-6.9 3.7a1.6 1.6 0 0 1-1.5 0l-6.9-3.7a1.6 1.6 0 0 1-.85-1.4V7.8" />
+      <path d="m3.9 7 7.35-3.9a1.6 1.6 0 0 1 1.5 0L20.1 7l-7.35 3.9a1.6 1.6 0 0 1-1.5 0L3.9 7Z" />
+      <path d="M12 11v9.7" />
+    </Svg>
+  );
+}
+
+export function IconReceipt(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M5.5 3.5h13v17l-2.2-1.4-2.2 1.4-2.1-1.4-2.2 1.4-2.1-1.4-2.2 1.4v-17Z" />
+      <path d="M9 8.5h6M9 12.5h6" />
+    </Svg>
+  );
+}
+
+export function IconGear(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <circle cx="12" cy="12" r="3.2" />
+      <path d="M19.4 14.4a1.5 1.5 0 0 0 .3 1.65l.05.05a1.8 1.8 0 1 1-2.55 2.55l-.05-.05a1.5 1.5 0 0 0-2.55 1.06v.14a1.8 1.8 0 1 1-3.6 0v-.07a1.5 1.5 0 0 0-2.6-1.02l-.05.05a1.8 1.8 0 1 1-2.55-2.55l.05-.05a1.5 1.5 0 0 0-1.06-2.55h-.14a1.8 1.8 0 1 1 0-3.6h.07A1.5 1.5 0 0 0 5.74 7.5l-.05-.05A1.8 1.8 0 1 1 8.24 4.9l.05.05a1.5 1.5 0 0 0 1.65.3h.07A1.5 1.5 0 0 0 10.92 3.9v-.14a1.8 1.8 0 1 1 3.6 0v.07a1.5 1.5 0 0 0 2.55 1.06l.05-.05a1.8 1.8 0 1 1 2.55 2.55l-.05.05a1.5 1.5 0 0 0-.3 1.65v.07a1.5 1.5 0 0 0 1.37.9h.14a1.8 1.8 0 1 1 0 3.6h-.07a1.5 1.5 0 0 0-1.36.89Z" />
+    </Svg>
+  );
+}
+
+export function IconPencil(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M4 20h4l10.5-10.5a2.1 2.1 0 0 0-3-3L5 17v3Z" />
+      <path d="m14.5 5.5 4 4" />
+    </Svg>
+  );
+}
+
+export function IconExternal(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M14 4h6v6" />
+      <path d="M20 4 11 13" />
+      <path d="M18.5 14.5v4a2 2 0 0 1-2 2h-11a2 2 0 0 1-2-2v-11a2 2 0 0 1 2-2h4" />
+    </Svg>
+  );
+}
+
+export function IconAlert(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M12 7.8v5M12 16.1h.01" />
+    </Svg>
+  );
+}

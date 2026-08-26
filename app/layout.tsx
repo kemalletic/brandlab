@@ -1,14 +1,6 @@
 import type { Metadata } from "next";
 import { Archivo, Inter } from "next/font/google";
 import "./globals.css";
-import { StoreProvider } from "@/lib/store";
-import Header from "@/components/Header";
-import MobileMenu from "@/components/MobileMenu";
-import Footer from "@/components/Footer";
-import CartDrawer from "@/components/CartDrawer";
-import SearchModal from "@/components/SearchModal";
-import Toaster from "@/components/Toaster";
-import Ticker from "@/components/Ticker";
 
 const archivo = Archivo({
   subsets: ["latin", "latin-ext"],
@@ -36,18 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="bs"
       className={`${archivo.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <StoreProvider>
-          <Ticker />
-          <Header />
-          <MobileMenu />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <CartDrawer />
-          <SearchModal />
-          <Toaster />
-        </StoreProvider>
-      </body>
+      <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }

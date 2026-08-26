@@ -20,3 +20,22 @@ export function normalizuj(s: string): string {
     .replace(/đ/g, "d")
     .replace(/dž/g, "dz");
 }
+
+const MJESECI = [
+  "januar", "februar", "mart", "april", "maj", "juni",
+  "juli", "august", "septembar", "oktobar", "novembar", "decembar",
+];
+
+/** ISO datum → "25.08.2026" */
+export function datumKratko(iso: string): string {
+  const d = new Date(iso);
+  const dan = String(d.getDate()).padStart(2, "0");
+  const mjesec = String(d.getMonth() + 1).padStart(2, "0");
+  return `${dan}.${mjesec}.${d.getFullYear()}.`;
+}
+
+/** ISO datum → "25. august 2026." */
+export function datumPuni(iso: string): string {
+  const d = new Date(iso);
+  return `${d.getDate()}. ${MJESECI[d.getMonth()]} ${d.getFullYear()}.`;
+}
