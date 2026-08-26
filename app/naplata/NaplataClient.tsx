@@ -188,25 +188,35 @@ export default function NaplataClient() {
       <h1 className="h-display mb-8 text-[clamp(2rem,6vw,3.5rem)]">Naplata</h1>
 
       {/* Koraci */}
-      <ol className="mb-10 flex gap-2 border-b border-line pb-4">
+      <ol className="mb-10 flex items-center border-b border-line pb-4">
         {KORACI.map((k, i) => (
-          <li key={k} className="flex items-center gap-2">
+          <li
+            key={k}
+            className={`flex min-w-0 items-center gap-2 ${
+              i < KORACI.length - 1 ? "flex-1" : ""
+            }`}
+          >
             <span
-              className={`flex h-6 w-6 items-center justify-center text-[11px] font-bold ${
+              className={`flex h-6 w-6 shrink-0 items-center justify-center text-[11px] font-bold ${
                 i <= korak ? "bg-cobalt text-white" : "bg-smoke text-steel"
               }`}
             >
               {i + 1}
             </span>
             <span
-              className={`text-xs font-semibold uppercase tracking-[0.1em] ${
+              className={`truncate text-[11px] font-semibold uppercase tracking-[0.08em] sm:text-xs sm:tracking-[0.1em] ${
                 i <= korak ? "text-ink" : "text-steel"
               }`}
             >
               {k}
             </span>
             {i < KORACI.length - 1 && (
-              <span className="mx-2 text-line">—</span>
+              <span
+                aria-hidden
+                className={`ml-1 h-px min-w-2 flex-1 sm:ml-2 ${
+                  i < korak ? "bg-cobalt" : "bg-line"
+                }`}
+              />
             )}
           </li>
         ))}

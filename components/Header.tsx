@@ -4,10 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useStore } from "@/lib/store";
+import { IconBag, IconHeart, IconSearch, IconUser } from "./Icons";
 
 const NAV = [
   { href: "/shop", label: "Shop" },
-  { href: "/shop?kategorija=duksevi", label: "Novo" },
+  { href: "/shop?novo=1", label: "Novo" },
   { href: "/o-nama", label: "O nama" },
 ];
 
@@ -15,16 +16,11 @@ export default function Header() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
-  const {
-    cart,
-    wishlist,
-    setCartOpen,
-    setSearchOpen,
-    setMenuOpen,
-    hydrated,
-  } = useStore();
+  const { cart, wishlist, setCartOpen, setSearchOpen, setMenuOpen, hydrated } =
+    useStore();
 
   useEffect(() => {
+    // Van početne header je uvijek solidan, pa nema šta da se prati.
     if (!isHome) return;
     const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
@@ -33,10 +29,12 @@ export default function Header() {
   }, [isHome]);
 
   const transparent = isHome && !scrolled;
-  const cartCount = hydrated
-    ? cart.reduce((sum, i) => sum + i.kolicina, 0)
-    : 0;
+  const cartCount = hydrated ? cart.reduce((s, i) => s + i.kolicina, 0) : 0;
   const wishCount = hydrated ? wishlist.length : 0;
+
+  // 44px touch meta na dodir, bez pomjeranja vizuelnog rasporeda
+  const iconBtn =
+    "relative flex h-11 w-11 items-center justify-center -mx-0.5 sm:mx-0";
 
   return (
     <header
@@ -46,19 +44,23 @@ export default function Header() {
           : "border-b border-line bg-white text-ink"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-[1600px] items-center justify-between px-5 sm:px-8">
-        <div className="flex items-center gap-8">
+      <div className="mx-auto flex h-16 max-w-[1600px] items-center justify-between gap-3 px-4 sm:px-8">
+        <div className="flex min-w-0 items-center gap-4 lg:gap-8">
           <button
             type="button"
             onClick={() => setMenuOpen(true)}
             aria-label="Otvori meni"
-            className="flex flex-col gap-[5px] lg:hidden"
+            className="-ml-2.5 flex h-11 w-11 flex-col items-center justify-center gap-[5px] lg:hidden"
           >
-            <span className="block h-[1.5px] w-6 bg-current" />
-            <span className="block h-[1.5px] w-6 bg-current" />
+            <span className="block h-[1.5px] w-[22px] bg-current" />
+            <span className="block h-[1.5px] w-[22px] bg-current" />
+            <span className="block h-[1.5px] w-[22px] bg-current" />
           </button>
 
-          <Link href="/" className="h-display text-xl tracking-tight">
+          <Link
+            href="/"
+            className="h-display shrink-0 text-lg tracking-tight sm:text-xl"
+          >
             BRANDLAB<span className="align-super text-[0.5em]">®</span>
           </Link>
 
@@ -75,32 +77,42 @@ export default function Header() {
           </nav>
         </div>
 
-        <div className="flex items-center gap-5">
+        <div className="flex items-center sm:gap-1">
           <button
             type="button"
             onClick={() => setSearchOpen(true)}
             aria-label="Pretraga"
-            className="text-lg"
+            className={iconBtn}
           >
-            ⌕
+            <IconSearch />
           </button>
-          <Link href="/favoriti" aria-label="Favoriti" className="relative text-lg">
-            ♡
+
+          <Link
+            href="/prijava"
+            aria-label="Prijava"
+            className={`${iconBtn} hidden sm:flex`}
+          >
+            <IconUser />
+          </Link>
+
+          <Link href="/favoriti" aria-label="Favoriti" className={iconBtn}>
+            <IconHeart />
             {wishCount > 0 && (
-              <span className="absolute -right-2 -top-1.5 flex h-4 min-w-4 items-center justify-center bg-cobalt px-1 text-[10px] font-bold text-white">
+              <span className="absolute right-[5px] top-[4px] flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-cobalt px-1 text-[10px] font-bold leading-none text-white ring-2 ring-white">
                 {wishCount}
               </span>
             )}
           </Link>
+
           <button
             type="button"
             onClick={() => setCartOpen(true)}
-            aria-label="Korpa"
-            className="relative text-lg"
+            aria-label={`Korpa${cartCount > 0 ? ` — ${cartCount}` : ""}`}
+            className={`${iconBtn} -mr-2.5 sm:mr-0`}
           >
-            ⊙
+            <IconBag />
             {cartCount > 0 && (
-              <span className="absolute -right-2 -top-1.5 flex h-4 min-w-4 items-center justify-center bg-cobalt px-1 text-[10px] font-bold text-white">
+              <span className="absolute right-[3px] top-[4px] flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-cobalt px-1 text-[10px] font-bold leading-none text-white ring-2 ring-white">
                 {cartCount}
               </span>
             )}

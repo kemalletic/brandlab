@@ -6,6 +6,7 @@ import { useStore } from "@/lib/store";
 import { nazivKategorije } from "@/lib/products";
 import { cijenaKM, popustPosto } from "@/lib/format";
 import type { Product } from "@/lib/types";
+import { IconHeart } from "./Icons";
 
 export default function ProductCard({
   proizvod,
@@ -59,11 +60,11 @@ export default function ProductCard({
         onClick={() => toggleWishlist(proizvod.slug)}
         aria-label={saved ? "Ukloni iz favorita" : "Dodaj u favorite"}
         aria-pressed={saved}
-        className={`absolute right-2 top-2 flex h-9 w-9 items-center justify-center text-lg transition-colors ${
-          saved ? "text-cobalt" : "text-ink/40 hover:text-ink"
+        className={`absolute right-1 top-1 flex h-10 w-10 items-center justify-center transition-colors ${
+          saved ? "text-cobalt" : "text-ink/45 hover:text-ink"
         }`}
       >
-        {saved ? "♥" : "♡"}
+        <IconHeart filled={saved} className="h-5 w-5" />
       </button>
 
       <div className="pt-3">

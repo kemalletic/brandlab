@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useStore } from "@/lib/store";
 import { PROIZVODI, nazivKategorije } from "@/lib/products";
 import { cijenaKM, normalizuj } from "@/lib/format";
+import { IconClose, IconSearch } from "./Icons";
 
 export default function SearchModal() {
   const { searchOpen } = useStore();
@@ -44,7 +45,7 @@ function SearchPanel() {
     <div className="fade-in fixed inset-0 z-[95] flex flex-col bg-white">
       <div className="border-b border-line px-5 py-4 sm:px-8">
         <div className="mx-auto flex max-w-3xl items-center gap-4">
-          <span className="text-xl text-steel">⌕</span>
+          <IconSearch className="h-6 w-6 shrink-0 text-steel" />
           <input
             type="search"
             autoFocus
@@ -57,9 +58,9 @@ function SearchPanel() {
             type="button"
             onClick={() => setSearchOpen(false)}
             aria-label="Zatvori pretragu"
-            className="shrink-0 text-2xl text-steel hover:text-ink"
+            className="-mr-2 flex h-11 w-11 shrink-0 items-center justify-center text-steel hover:text-ink"
           >
-            ✕
+            <IconClose />
           </button>
         </div>
       </div>

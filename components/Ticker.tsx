@@ -16,7 +16,7 @@ export default function Ticker() {
             className="flex items-center px-6 text-xs font-bold uppercase tracking-[0.14em] text-white"
           >
             {msg}
-            <span className="ml-6 text-white/50">✕</span>
+            <span className="ml-6 text-white/40">/</span>
           </span>
         ))}
       </div>

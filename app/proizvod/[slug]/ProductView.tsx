@@ -8,6 +8,7 @@ import { nazivKategorije, srodniProizvodi } from "@/lib/products";
 import { cijenaKM, popustPosto } from "@/lib/format";
 import type { Product } from "@/lib/types";
 import ProductCard from "@/components/ProductCard";
+import { IconHeart, IconMinus, IconPlus } from "@/components/Icons";
 
 const SEKCIJE = ["Opis", "Materijal i održavanje", "Dostava i povrat"] as const;
 
@@ -175,13 +176,13 @@ export default function ProductView({ proizvod }: { proizvod: Product }) {
               onClick={() => toggleWishlist(proizvod.slug)}
               aria-label={saved ? "Ukloni iz favorita" : "Dodaj u favorite"}
               aria-pressed={saved}
-              className={`flex h-12 w-12 shrink-0 items-center justify-center border text-lg transition-colors ${
+              className={`flex h-12 w-12 shrink-0 items-center justify-center border transition-colors ${
                 saved
                   ? "border-cobalt text-cobalt"
                   : "border-line hover:border-ink"
               }`}
             >
-              {saved ? "♥" : "♡"}
+              <IconHeart filled={saved} className="h-5 w-5" />
             </button>
           </div>
 
@@ -201,8 +202,12 @@ export default function ProductView({ proizvod }: { proizvod: Product }) {
                   className="flex w-full items-center justify-between py-4 text-left text-xs font-semibold uppercase tracking-[0.1em]"
                 >
                   {naslov}
-                  <span className="text-lg leading-none text-steel">
-                    {otvorena === naslov ? "−" : "+"}
+                  <span className="text-steel">
+                    {otvorena === naslov ? (
+                      <IconMinus className="h-4 w-4" />
+                    ) : (
+                      <IconPlus className="h-4 w-4" />
+                    )}
                   </span>
                 </button>
                 {otvorena === naslov && (

@@ -13,6 +13,7 @@ import {
 import type { Kategorija } from "@/lib/types";
 import ProductGrid from "@/components/ProductGrid";
 import { cijenaKM } from "@/lib/format";
+import { IconClose, IconFilter } from "@/components/Icons";
 
 type Sort = "novo" | "cijena-rastuce" | "cijena-opadajuce";
 
@@ -26,6 +27,7 @@ export default function ShopClient() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const kategorijaParam = searchParams.get("kategorija") as Kategorija | null;
+  const samoNovo = searchParams.get("novo") === "1";
 
   const [velicine, setVelicine] = useState<string[]>([]);
   const [maxCijena, setMaxCijena] = useState(MAX_CIJENA);
@@ -56,6 +58,7 @@ export default function ShopClient() {
   const filtrirani = useMemo(() => {
     let lista = PROIZVODI.filter((p) => {
       if (aktivnaKategorija && p.kategorija !== aktivnaKategorija) return false;
+      if (samoNovo && !p.novo) return false;
       if (p.cijena > maxCijena) return false;
       if (velicine.length > 0 && !p.velicine.some((v) => velicine.includes(v)))
         return false;
@@ -72,10 +75,13 @@ export default function ShopClient() {
       );
     }
     return lista;
-  }, [aktivnaKategorija, velicine, maxCijena, sort]);
+  }, [aktivnaKategorija, samoNovo, velicine, maxCijena, sort]);
 
   const imaFiltera =
-    Boolean(aktivnaKategorija) || velicine.length > 0 || maxCijena < MAX_CIJENA;
+    Boolean(aktivnaKategorija) ||
+    samoNovo ||
+    velicine.length > 0 ||
+    maxCijena < MAX_CIJENA;
 
   const filterPanel = (
     <div className="space-y-8">
@@ -168,21 +174,33 @@ export default function ShopClient() {
         </Link>
         <span>/</span>
         <span className="text-ink">
-          {aktivnaKategorija ? nazivKategorije(aktivnaKategorija) : "Shop"}
+          {samoNovo
+            ? "Novo"
+            : aktivnaKategorija
+              ? nazivKategorije(aktivnaKategorija)
+              : "Shop"}
         </span>
       </nav>
 
       <h1 className="h-display mb-8 text-[clamp(2rem,7vw,4.5rem)]">
-        {aktivnaKategorija ? nazivKategorije(aktivnaKategorija) : "Sve"}
+        {samoNovo
+          ? "Novi drop"
+          : aktivnaKategorija
+            ? nazivKategorije(aktivnaKategorija)
+            : "Sve"}
       </h1>
 
       <div className="mb-6 flex items-center justify-between gap-4 border-y border-line py-3">
         <button
           type="button"
           onClick={() => setFilterOpen(true)}
-          className="text-xs font-semibold uppercase tracking-[0.1em] lg:invisible"
+          className="-ml-1 flex items-center gap-2 px-1 py-2 text-xs font-semibold uppercase tracking-[0.1em] lg:invisible"
         >
-          Filteri {imaFiltera && <span className="text-cobalt">•</span>}
+          <IconFilter className="h-[18px] w-[18px]" />
+          Filteri
+          {imaFiltera && (
+            <span className="h-1.5 w-1.5 rounded-full bg-cobalt" />
+          )}
         </button>
 
         <p className="label-tech hidden lg:block">
@@ -249,9 +267,9 @@ export default function ShopClient() {
                 type="button"
                 onClick={() => setFilterOpen(false)}
                 aria-label="Zatvori"
-                className="text-2xl leading-none text-steel"
+                className="-mr-2 flex h-11 w-11 items-center justify-center text-steel"
               >
-                ✕
+                <IconClose />
               </button>
             </div>
             {filterPanel}

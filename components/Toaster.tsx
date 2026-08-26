@@ -1,5 +1,7 @@
 "use client";
 
+import { IconClose } from "./Icons";
+
 import { useStore } from "@/lib/store";
 
 export default function Toaster() {
@@ -20,7 +22,7 @@ export default function Toaster() {
             aria-label="Zatvori obavještenje"
             className="text-white/50 hover:text-white"
           >
-            ✕
+            <IconClose className="h-4 w-4" />
           </button>
         </div>
       ))}
